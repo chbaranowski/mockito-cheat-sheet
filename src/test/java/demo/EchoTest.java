@@ -9,20 +9,17 @@ import static org.mockito.BDDMockito.*;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
-import demo.Echo;
-import demo.EchoRequest;
-import demo.EchoResponse;
-import demo.EchoSysOut;
 
 /**
  * Cheat Sheet Test for Mockito
