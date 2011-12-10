@@ -27,8 +27,8 @@ import demo.EchoSysOut;
 /**
  * Cheat Sheet Test for Mockito
  *  
- * More details about mockito see http://code.google.com/p/mockito/
- * or goto the perfect mockito documentation page  
+ * More details about Mockito see http://code.google.com/p/mockito/
+ * or goto the perfect Mockito documentation page  
  * http://docs.mockito.googlecode.com/hg/latest/org/mockito/Mockito.html
  */
 public class EchoTest {
@@ -96,7 +96,7 @@ public class EchoTest {
 	@Test
 	public void stubbingChangingDefaultReturnValues(){
 		mockEcho = mock(Echo.class, new DefaultReturnValues());
-		assertThat("42", is(mockEcho.echo("Hello").getReturnCode()));
+		assertThat(mockEcho.echo("Hello").getReturnCode(), is("42"));
 	}
 	
 	@Test
@@ -213,9 +213,9 @@ public class EchoTest {
 		// given
 		given(mockEcho.echo("Hello Mockito")).willReturn(echoResponse("BDD"));
 		// when
-		EchoResponse echoResponse = mockEcho.echo("Hello Mockito");
+		EchoResponse response = mockEcho.echo("Hello Mockito");
 		// then
-		assertThat(echoResponse, is(echoResponse("BDD")));
+		assertThat(response, is(echoResponse("BDD")));
 	}
 	
 	Answer<EchoResponse> echoAnswer() {
