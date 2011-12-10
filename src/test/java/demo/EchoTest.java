@@ -88,8 +88,7 @@ public class EchoTest {
 	
 	@Test
 	public void stubbingIteratorStyleReturnDifferentValues() {
-		when(mockEcho.echo("42"))
-			.thenReturn(echoResponse("0042"), echoResponse("0043"));
+		when(mockEcho.echo("42")).thenReturn(echoResponse("0042"), echoResponse("0043"));
 		assertEquals(echoResponse("0042"), mockEcho.echo("42"));
 		assertEquals(echoResponse("0043"), mockEcho.echo("42"));
 	}
