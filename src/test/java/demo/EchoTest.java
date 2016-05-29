@@ -16,11 +16,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 /**
- * Cheat Sheet Test for Mockito
+ * Cheat sheet test for Mockito
  *  
- * More details about Mockito see http://code.google.com/p/mockito/
+ * More details about Mockito see http://mockito.org/
  * or goto the perfect Mockito documentation page  
- * http://docs.mockito.googlecode.com/hg/latest/org/mockito/Mockito.html
+ * http://site.mockito.org/mockito/docs/current/org/mockito/Mockito.html
  */
 public class EchoTest {
 	
