@@ -1,20 +1,14 @@
 package demo;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.BDDMockito.*;
-
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
@@ -93,7 +87,7 @@ public class EchoTest {
 	@Test
 	public void stubbingChangingDefaultReturnValues(){
 		mockEcho = mock(Echo.class, new DefaultReturnValues());
-		assertThat(mockEcho.echo("Hello").getReturnCode(), is("42"));
+		assertEquals(echoResponse("42"), mockEcho.echo("Hello"));
 	}
 	
 	@Test
@@ -212,7 +206,7 @@ public class EchoTest {
 		// when
 		EchoResponse response = mockEcho.echo("Hello Mockito");
 		// then
-		assertThat(response, is(echoResponse("BDD")));
+		assertEquals(echoResponse("BDD"), response);
 	}
 	
 	Answer<EchoResponse> echoAnswer() {
@@ -228,16 +222,12 @@ public class EchoTest {
 		return new EchoResponse(code);
 	}
 	
-	Matcher<String> isValidAnswer() {
-		return new BaseMatcher<String>() {
-			@Override
-			public void describeTo(Description description) {
-				description.appendText("The msg is valid when not null and equals 42");
-			}
+	ArgumentMatcher<String> isValidAnswer() {
+		return new ArgumentMatcher<String>() {
 
 			@Override
-			public boolean matches(Object item) {
-				return item != null && item.equals("42");
+			public boolean matches(Object argument) {
+				return argument != null && argument.equals("42");
 			}
 		};
 	}
