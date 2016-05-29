@@ -11,6 +11,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -169,7 +170,7 @@ public class EchoTest {
 	public void findingRedundantInvocations() {
 		mockEcho.echo("Hello Mockito");
 		mockEcho.echo("Hello EasyMock");
-		verify(mockEcho).echo("Hello Mockito");
+		verify(mockEcho, description("The echo method was not called.")).echo("Hello Mockito");
 		thrown.expect(NoInteractionsWanted.class);
 		verifyNoMoreInteractions(mockEcho);
 	}
@@ -207,6 +208,21 @@ public class EchoTest {
 		EchoResponse response = mockEcho.echo("Hello Mockito");
 		// then
 		assertEquals(echoResponse("BDD"), response);
+	}
+	
+	@Test
+	public void partialMocks() {
+		EchoSysOut mockSysOut = mock(EchoSysOut.class);
+		when(mockSysOut.echo("real method")).thenCallRealMethod();
+		// delegate to real method print msg to sysout
+		mockSysOut.echo("real method");
+		// mock method is called 
+		mockSysOut.echo("mocking");
+	}
+	
+	@Test
+	public void mockingDetails() {
+		assertTrue(Mockito.mockingDetails(mockEcho).isMock());
 	}
 	
 	Answer<EchoResponse> echoAnswer() {
